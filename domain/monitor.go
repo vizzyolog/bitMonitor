@@ -12,6 +12,7 @@ type Monitor struct {
 	Frequency time.Duration `json:"frequency" validate:"required"`
 	Rates     []Rate        `json:"rate" validate:"required"`
 	Complete  bool          `json:"complete" validate:"required"`
+	InWork    bool          `json:"inwork" validate:"required"`
 }
 
 func (m Monitor) Validate() error {

@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    networks:
+      - bitmonitor_net
+  bitmonitor:
+    build: ./
+    ports:
+      - "127.0.0.1:8080:8080"
+    links:
+      - mongo
+    networks:
+      - bitmonitor_net
+
+networks:
+  bitmonitor_net: 
+
+

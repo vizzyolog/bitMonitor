@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"app/controller"
 	"app/interfaces/repo"
@@ -11,8 +12,9 @@ import (
 )
 
 func main() {
-	db, closeDB, err := mongodb.NewMongo("", true)
+	db, closeDB, err := mongodb.NewMongo("mongodb://root:example@mongo:27017/", true)
 	if err != nil {
+		fmt.Println("error connect to mongodb ", err)
 		panic(err)
 	}
 	defer closeDB()
@@ -28,5 +30,5 @@ func main() {
 	httpRouter.GetDevice("/device", monitorController.FindAll)
 	httpRouter.GetDevice("/device/:id", monitorController.FindById)
 	httpRouter.AddNewDevice("/device", monitorController.AddMonitor)
-	httpRouter.Start(":8000")
+	httpRouter.Start(":8080")
 }
